@@ -1,0 +1,83 @@
+{
+  "whatsapp_number": "01700000000",
+  "bkash_number": "01700000000",
+  "nagad_number": "01700000000",
+  "delivery_inside_dhaka": 80,
+  "delivery_outside_dhaka": 130,
+  "free_delivery_threshold": 3000,
+  "announcement_text": "Welcome to YUME Jewellery · Premium Waterproof Stainless Steel",
+  "hero": {
+    "eyebrow": "The Autumn Edit · 2026",
+    "title": "Dreamt in gold,\nmade for you.",
+    "subtitle": "Waterproof & anti-tarnish stainless steel jewellery plated in 18K gold. Designed for everyday luxury and effortless beauty.",
+    "image_url": "/images/sample/hero-banner.jpg",
+    "image_alt": "Gold pearl necklace and pearl stud earrings resting on cream silk",
+    "primary_cta": {
+      "label": "Shop the collection",
+      "href": "/shop"
+    },
+    "secondary_cta": {
+      "label": "New arrivals",
+      "href": "/shop?sort=newest"
+    }
+  },
+  "social": {
+    "instagram": "https://instagram.com/",
+    "facebook": "https://facebook.com/",
+    "tiktok": null
+  },
+  "instagram_handle": "yume.jewellery",
+  "features": {
+    "reviews_enabled": false,
+    "show_stock": true,
+    "cod_enabled": true
+  },
+  "promo_banner": {
+    "is_active": true,
+    "title": "Festive Season Exclusive Collection",
+    "eyebrow": "Special Offer",
+    "discount_text": "UP TO 30% OFF",
+    "subtitle": "Waterproof, anti-tarnish stainless steel pieces. Cash on Delivery.",
+    "coupon_code": "YUME20",
+    "cta_text": "Explore Offers",
+    "cta_link": "/shop"
+  },
+  "marquee_ticker": {
+    "is_active": false,
+    "primary_text": "Welcome to YUME Jewellery · Premium Waterproof Stainless Steel",
+    "secondary_text": "18K Gold Plated · Anti-Tarnish & Sweatproof · Cash on Delivery across Bangladesh",
+    "speed_seconds": 25
+  },
+  "coupons": [
+    {
+      "code": "YUME10",
+      "discount_percent": 10,
+      "is_active": true
+    },
+    {
+      "code": "YUME20",
+      "discount_percent": 20,
+      "is_active": true
+    },
+    {
+      "code": "YUME30",
+      "discount_percent": 30,
+      "is_active": true
+    },
+    {
+      "code": "WELCOME15",
+      "discount_percent": 15,
+      "is_active": true
+    }
+  ],
+  "announcement_popup": {
+    "is_active": true,
+    "badge_text": "✨ EXCLUSIVE OFFER",
+    "title": "Waterproof Jewellery Special",
+    "subtitle": "Get flat 20% OFF on all 18K gold plated waterproof stainless steel pieces! Use coupon code below at checkout.",
+    "image_url": "/images/sample/cat-necklaces.jpg",
+    "coupon_code": "YUME20",
+    "cta_label": "Shop Special Offers",
+    "cta_href": "/shop"
+  }
+}
