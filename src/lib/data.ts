@@ -66,6 +66,29 @@ export async function getAllProducts(): Promise<ProductWithRelations[]> {
   return activeSampleProducts();
 }
 
+/** Every product (including hidden ones), newest first. Admin-only. */
+export async function getAdminProducts(): Promise<ProductWithRelations[]> {
+  const supabase = getSupabaseServerClient();
+  if (supabase) {
+    try {
+      const { data, error } = await supabase
+        .from("products")
+        .select(`
+          *,
+          category:categories(id, name, slug),
+          images:product_images(*)
+        `)
+        .order("created_at", { ascending: false });
+      if (!error && data) {
+        return data as ProductWithRelations[];
+      }
+    } catch {
+      // Fallback
+    }
+  }
+  return sampleProducts;
+}
+
 export async function getNewArrivals(limit = 8): Promise<ProductWithRelations[]> {
   const all = await getAllProducts();
   return [...all]

@@ -251,7 +251,7 @@ export function SettingsManager({ initialSettings }: { initialSettings: Extended
             </div>
           </div>
 
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
             <div>
               <label className="block text-xs font-semibold uppercase tracking-wider text-ink">
                 Eyebrow Badge
@@ -358,7 +358,7 @@ export function SettingsManager({ initialSettings }: { initialSettings: Extended
           </div>
         )}
 
-        <div className="grid gap-5 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <div>
             <label className="block text-xs font-semibold uppercase tracking-wider text-ink">
               Offer Headline
@@ -515,7 +515,7 @@ export function SettingsManager({ initialSettings }: { initialSettings: Extended
           </h2>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
           <div>
             <label className="block text-xs font-semibold uppercase tracking-wider text-ink">
               bKash Number
@@ -607,7 +607,7 @@ export function SettingsManager({ initialSettings }: { initialSettings: Extended
           </h2>
         </div>
 
-        <div className="grid gap-5 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
           <div>
             <label className="block text-xs font-semibold uppercase tracking-wider text-ink">
               Inside Dhaka Delivery Fee (৳)
@@ -695,7 +695,7 @@ export function SettingsManager({ initialSettings }: { initialSettings: Extended
           First-time visitors see this premium card poster modal. You can upload an offer banner, festival announcement, or brand news. Can be used with or without a discount coupon.
         </p>
 
-        <div className="grid gap-6 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           <div>
             <label className="block text-xs font-semibold uppercase tracking-wider text-ink">
               Top Badge Text (Optional)

@@ -97,7 +97,7 @@ export function OrdersManager({ initialOrders }: { initialOrders: Order[] }) {
             >
               <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <div className="flex items-center gap-2.5">
+                  <div className="flex flex-wrap items-center gap-2">
                     <Link
                       href={`/admin/orders/${order.order_number}`}
                       className="font-mono text-base font-bold text-accent hover:underline"
@@ -139,7 +139,7 @@ export function OrdersManager({ initialOrders }: { initialOrders: Order[] }) {
                 </div>
 
                 <div className="flex items-center justify-between gap-4 border-t border-line/60 pt-3 sm:border-0 sm:pt-0">
-                  <div className="text-right sm:text-right">
+                  <div className="text-left sm:text-right">
                     <p className="font-serif text-lg font-bold text-ink">{formatBDT(order.total)}</p>
                     <p className="text-[0.6875rem] font-medium text-muted uppercase">
                       {order.payment_method} {order.transaction_id ? `• Trx: ${order.transaction_id}` : ""}

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { createOrder } from "@/lib/orders";
 
@@ -68,6 +69,9 @@ export async function POST(req: Request) {
       coupon_code: validated.coupon_code,
       items: validated.items,
     });
+
+    // Stock levels changed — refresh product pages
+    revalidatePath("/", "layout");
 
     return NextResponse.json({ success: true, order }, { status: 201 });
   } catch (err: any) {

@@ -95,7 +95,7 @@ export function OrderDetailView({ initialOrder }: { initialOrder: Order }) {
           </div>
 
           {/* Quick Call & WhatsApp Customer Actions */}
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <a
               href={`tel:${order.phone}`}
               className="btn btn-outline h-10 px-4 text-xs gap-1.5"
@@ -155,7 +155,7 @@ export function OrderDetailView({ initialOrder }: { initialOrder: Order }) {
       </section>
 
       {/* Grid: Left Items + Right Customer Details */}
-      <div className="grid gap-8 lg:grid-cols-12">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
         {/* Left: Items list & Totals */}
         <div className="space-y-6 lg:col-span-7">
           <section className="border border-line bg-cream p-5 sm:p-6 shadow-sm">

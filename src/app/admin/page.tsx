@@ -165,7 +165,7 @@ export default async function AdminDashboardPage() {
             <AlertTriangle size={18} />
             <h2 className="font-serif text-lg font-bold">Low Stock Warning</h2>
           </div>
-          <div className="grid gap-3 sm:grid-cols-2">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {lowStockProducts.map((p) => (
               <div key={p.id} className="flex items-center justify-between rounded border border-rose-200 bg-white p-3">
                 <div>
