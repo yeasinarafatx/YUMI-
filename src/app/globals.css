@@ -131,6 +131,14 @@
   /* Hide scrollbar for horizontal product rails while keeping scrollability */
   .no-scrollbar { scrollbar-width: none; }
   .no-scrollbar::-webkit-scrollbar { display: none; }
+
+  #mobile-bottom-nav button,
+  #mobile-bottom-nav a,
+  #floating-whatsapp-btn {
+    -webkit-tap-highlight-color: transparent;
+    outline: none !important;
+    box-shadow: none !important;
+  }
 }
 
 /* ==========================================================================

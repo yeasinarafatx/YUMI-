@@ -37,7 +37,6 @@ export function Header({ social }: HeaderProps) {
 
   const closeMenu = useCallback(() => {
     setMenuOpen(false);
-    menuButtonRef.current?.focus();
   }, []);
 
   return (

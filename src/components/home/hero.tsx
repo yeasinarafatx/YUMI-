@@ -13,7 +13,7 @@ export function Hero({ hero }: { hero: HeroContent }) {
   return (
     <section
       aria-labelledby="hero-title"
-      className="relative isolate flex min-h-[62svh] sm:min-h-[70svh] md:min-h-[82vh] items-center overflow-hidden bg-sand"
+      className="relative isolate flex min-h-[68svh] sm:min-h-[72svh] md:min-h-[84vh] items-center overflow-hidden bg-sand"
     >
       <Image
         src={hero.image_url}
@@ -24,13 +24,13 @@ export function Hero({ hero }: { hero: HeroContent }) {
         sizes="100vw"
         placeholder="blur"
         blurDataURL={IMAGE_PLACEHOLDER}
-        className="-z-10 animate-slow-zoom object-cover object-center"
+        className="-z-10 animate-slow-zoom object-cover object-[center_right] sm:object-center"
       />
 
-      {/* Gentle legibility veil */}
+      {/* Gentle luxury legibility veil - softer so the jewelry photo shines through */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-gradient-to-t from-sand/90 via-sand/40 to-transparent md:bg-gradient-to-r md:from-sand/90 md:via-sand/40 md:to-transparent"
+        className="absolute inset-0 -z-10 bg-gradient-to-t from-sand/75 via-sand/30 to-sand/10 md:bg-gradient-to-r md:from-sand/90 md:via-sand/40 md:to-transparent"
       />
 
       <div className="container-luxe relative py-12 sm:py-16 md:py-24">

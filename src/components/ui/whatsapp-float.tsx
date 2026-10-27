@@ -35,7 +35,7 @@ export function WhatsAppFloat({ whatsappNumber = "01700000000" }: WhatsAppFloatP
   )}`;
 
   return (
-    <aside aria-label="Customer Support" className="fixed bottom-[calc(4.5rem+env(safe-area-inset-bottom))] right-5 lg:bottom-6 z-40 flex items-center gap-3">
+    <aside aria-label="Customer Support" className="fixed bottom-[calc(4.75rem+env(safe-area-inset-bottom))] right-4 lg:bottom-6 lg:right-6 z-40 flex items-center gap-3">
       <AnimatePresence>
         {showTooltip && (
           <m.div
@@ -46,7 +46,6 @@ export function WhatsAppFloat({ whatsappNumber = "01700000000" }: WhatsAppFloatP
             className="hidden items-center gap-2 rounded-full border border-line bg-cream px-4 py-2 shadow-lg sm:flex"
           >
             <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
             </span>
             <span className="text-xs font-semibold text-ink">Chat on WhatsApp</span>
@@ -68,13 +67,9 @@ export function WhatsAppFloat({ whatsappNumber = "01700000000" }: WhatsAppFloatP
         rel="noopener noreferrer"
         aria-label="Chat with YUME Jewellery on WhatsApp"
         id="floating-whatsapp-btn"
-        className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-xl transition-all duration-300 hover:scale-110 hover:shadow-2xl active:scale-95 cursor-pointer"
+        className="group relative flex h-13 w-13 sm:h-14 sm:w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer select-none"
       >
-        <span
-          className="absolute -inset-1 -z-10 animate-ping rounded-full bg-[#25D366] opacity-35"
-          aria-hidden="true"
-        />
-        <WhatsAppIcon size={32} className="text-white drop-shadow-md transition-transform duration-300 group-hover:scale-110" />
+        <WhatsAppIcon size={30} className="text-white drop-shadow-sm transition-transform duration-300 group-hover:scale-110" />
       </a>
     </aside>
   );

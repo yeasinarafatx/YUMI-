@@ -15,7 +15,7 @@ interface BottomNavProps {
 }
 
 const itemBase =
-  "relative flex h-full flex-1 flex-col items-center justify-center gap-0.5 text-[0.625rem] font-medium tracking-wide transition-colors active:scale-95 cursor-pointer";
+  "relative flex h-full flex-1 flex-col items-center justify-center gap-0.5 text-[0.625rem] font-medium tracking-wide transition-colors active:scale-95 cursor-pointer outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0 select-none border-0";
 
 /**
  * Mobile-only (below lg) fixed bottom navigation.
