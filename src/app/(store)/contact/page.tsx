@@ -24,7 +24,7 @@ export default async function ContactPage() {
         </p>
       </div>
 
-      <div className="mx-auto mt-14 grid max-w-4xl gap-8 md:grid-cols-2">
+      <div className="mx-auto mt-10 grid max-w-4xl grid-cols-1 gap-6 md:mt-14 md:gap-8 md:grid-cols-2">
         {/* Contact Info Card */}
         <div className="border border-line bg-cream p-8 shadow-sm space-y-6">
           <h2 className="font-serif text-2xl text-ink">Customer Support</h2>

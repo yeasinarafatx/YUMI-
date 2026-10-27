@@ -7,7 +7,7 @@ import { IMAGE_PLACEHOLDER } from "@/lib/utils";
 export function BrandStory() {
   return (
     <section aria-labelledby="story-heading" className="bg-sand">
-      <div className="container-luxe grid items-center gap-8 py-12 md:grid-cols-2 md:gap-16 md:py-28 lg:gap-24">
+      <div className="container-luxe grid grid-cols-1 items-center gap-8 py-12 md:grid-cols-2 md:gap-16 md:py-28 lg:gap-24">
         <Reveal className="relative">
           <div className="relative aspect-[4/5] overflow-hidden rounded shadow-sm">
             <Image

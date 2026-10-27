@@ -101,7 +101,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         </nav>
 
         {/* Product Layout Grid */}
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
           {/* Left: Gallery (7 cols on desktop) */}
           <div className="lg:col-span-7">
             <ProductGallery images={product.images} title={product.name} />

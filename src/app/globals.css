@@ -39,7 +39,7 @@
 
   --animate-fade-up: fade-up 0.9s var(--ease-luxe) both;
   --animate-fade-in: fade-in 0.6s var(--ease-luxe) both;
-  --animate-page-in: page-in 0.45s var(--ease-luxe) both;
+  --animate-page-in: page-in 0.45s var(--ease-luxe) backwards;
   --animate-slow-zoom: slow-zoom 2.8s var(--ease-luxe) both;
   --animate-scroll-hint: scroll-hint 2.4s ease-in-out infinite;
   --animate-marquee: marquee 25s linear infinite;
@@ -87,6 +87,13 @@
   html {
     -webkit-tap-highlight-color: transparent;
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: clip;
+  }
+
+  /* iOS Safari zooms the page when a focused field is < 16px */
+  @media (max-width: 767px) {
+    input, select, textarea { font-size: 16px; }
   }
 
   body {

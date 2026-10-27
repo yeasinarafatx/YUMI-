@@ -184,7 +184,7 @@ export function CheckoutForm({ settings }: CheckoutFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="grid gap-10 lg:grid-cols-12 lg:gap-14">
+    <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-14">
       {/* Honeypot field (hidden from real users) */}
       <input
         type="text"
@@ -212,7 +212,7 @@ export function CheckoutForm({ settings }: CheckoutFormProps) {
         </div>
 
         {/* 1. Customer Details */}
-        <section className="border border-line bg-cream p-6 sm:p-8 space-y-5 shadow-sm">
+        <section className="border border-line bg-cream p-4 sm:p-8 space-y-5 shadow-sm">
           <div>
             <h2 className="font-serif font-bold text-2xl text-ink">1. Customer Information</h2>
             <p className="mt-0.5 text-xs font-medium text-muted">Guest Checkout — no account needed.</p>
@@ -234,7 +234,7 @@ export function CheckoutForm({ settings }: CheckoutFormProps) {
               />
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
                 <label htmlFor="phone" className="block text-xs font-bold uppercase tracking-wider text-ink">
                   Phone Number (BD) *
@@ -271,7 +271,7 @@ export function CheckoutForm({ settings }: CheckoutFormProps) {
         </section>
 
         {/* 2. Delivery Address */}
-        <section className="border border-line bg-cream p-6 sm:p-8 space-y-5 shadow-sm">
+        <section className="border border-line bg-cream p-4 sm:p-8 space-y-5 shadow-sm">
           <div>
             <h2 className="font-serif font-bold text-2xl text-ink">2. Shipping Address</h2>
             <p className="mt-0.5 text-xs text-muted">Where should we deliver your jewellery?</p>
@@ -293,7 +293,7 @@ export function CheckoutForm({ settings }: CheckoutFormProps) {
               />
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
                 <label htmlFor="district" className="block text-xs font-bold uppercase tracking-wider text-ink">
                   District / City *
@@ -359,7 +359,7 @@ export function CheckoutForm({ settings }: CheckoutFormProps) {
         </section>
 
         {/* 3. Payment Method */}
-        <section className="border border-line bg-cream p-6 sm:p-8 space-y-5 shadow-sm">
+        <section className="border border-line bg-cream p-4 sm:p-8 space-y-5 shadow-sm">
           <div>
             <h2 className="font-serif font-bold text-2xl text-ink">3. Payment Method</h2>
             <p className="mt-0.5 text-xs text-muted">Select your preferred payment option below.</p>
@@ -408,8 +408,8 @@ export function CheckoutForm({ settings }: CheckoutFormProps) {
                   : "border-line bg-white/60 hover:border-accent/40"
               }`}
             >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex min-w-0 items-center gap-3">
                   <input
                     type="radio"
                     name="payment"
@@ -429,7 +429,7 @@ export function CheckoutForm({ settings }: CheckoutFormProps) {
 
               {paymentMethod === "bkash" && (
                 <div className="mt-4 border-t border-line/60 pt-4 text-xs space-y-3.5 text-ink/80">
-                  <div className="flex items-center justify-between rounded bg-sand/80 p-3.5 border border-line">
+                  <div className="flex items-center justify-between rounded bg-sand/80 p-3.5 border border-line flex-wrap gap-3">
                     <div>
                       <p className="text-[0.6875rem] font-medium text-muted">bKash Send Money Number:</p>
                       <p className="font-mono text-lg font-bold text-accent">{bkashNumber}</p>
@@ -451,7 +451,7 @@ export function CheckoutForm({ settings }: CheckoutFormProps) {
                     <strong>Instructions:</strong> Open bKash App, select <em>Send Money</em> to the number above for <strong>{formatBDT(total)}</strong>, then enter your TrxID below:
                   </p>
 
-                  <div className="grid gap-3 sm:grid-cols-2 pt-1">
+                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 pt-1">
                     <div>
                       <label className="block font-bold uppercase tracking-wider text-[0.6875rem] text-ink">
                         Sender bKash Number *
@@ -492,8 +492,8 @@ export function CheckoutForm({ settings }: CheckoutFormProps) {
                   : "border-line bg-white/60 hover:border-accent/40"
               }`}
             >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex min-w-0 items-center gap-3">
                   <input
                     type="radio"
                     name="payment"
@@ -513,7 +513,7 @@ export function CheckoutForm({ settings }: CheckoutFormProps) {
 
               {paymentMethod === "nagad" && (
                 <div className="mt-4 border-t border-line/60 pt-4 text-xs space-y-3.5 text-ink/80">
-                  <div className="flex items-center justify-between rounded bg-sand/80 p-3.5 border border-line">
+                  <div className="flex items-center justify-between rounded bg-sand/80 p-3.5 border border-line flex-wrap gap-3">
                     <div>
                       <p className="text-[0.6875rem] font-medium text-muted">Nagad Send Money Number:</p>
                       <p className="font-mono text-lg font-bold text-accent">{nagadNumber}</p>
@@ -535,7 +535,7 @@ export function CheckoutForm({ settings }: CheckoutFormProps) {
                     <strong>Instructions:</strong> Open Nagad App, tap <em>Send Money</em> to the number above for <strong>{formatBDT(total)}</strong>, and submit your TrxID below:
                   </p>
 
-                  <div className="grid gap-3 sm:grid-cols-2 pt-1">
+                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 pt-1">
                     <div>
                       <label className="block font-bold uppercase tracking-wider text-[0.6875rem] text-ink">
                         Sender Nagad Number *
@@ -572,7 +572,7 @@ export function CheckoutForm({ settings }: CheckoutFormProps) {
 
       {/* Right: Sticky Order Summary */}
       <div className="lg:col-span-5">
-        <div className="sticky top-28 border border-line bg-cream p-6 sm:p-8 space-y-6 shadow-sm">
+        <div className="lg:sticky lg:top-28 border border-line bg-cream p-4 sm:p-8 space-y-6 shadow-sm">
           <div className="flex items-center justify-between border-b border-line pb-4">
             <h2 className="font-serif font-bold text-2xl text-ink">Order Summary</h2>
             <span className="text-xs font-bold uppercase tracking-wider text-muted">

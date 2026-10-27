@@ -74,7 +74,7 @@ export default function CartPage() {
         </div>
       </div>
 
-      <div className="mt-10 grid gap-12 lg:grid-cols-12 lg:gap-16">
+      <div className="mt-10 grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
         {/* Left: Cart Items List */}
         <div className="lg:col-span-8">
           <ul className="divide-y divide-line border-y border-line">

@@ -42,7 +42,7 @@ export function Footer({ categories, settings }: FooterProps) {
       </span>
 
       <div className="container-luxe relative pb-10 pt-16 md:pt-20">
-        <div className="grid gap-12 md:grid-cols-12 md:gap-8">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-12 md:gap-8">
           {/* Brand */}
           <div className="md:col-span-4">
             <Logo tone="light" size="lg" className="mb-6" />

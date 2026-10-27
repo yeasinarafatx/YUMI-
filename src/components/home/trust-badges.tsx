@@ -30,7 +30,7 @@ export function TrustBadges({}: TrustBadgesProps = {}) {
 
   return (
     <section aria-label="Why shop with YUME" className="border-y border-line bg-cream">
-      <ul className="container-luxe grid divide-y divide-line md:grid-cols-3 md:divide-x md:divide-y-0">
+      <ul className="container-luxe grid grid-cols-1 divide-y divide-line md:grid-cols-3 md:divide-x md:divide-y-0">
         {badges.map(({ Icon, title, text }, i) => (
           <li key={title}>
             <Reveal delay={i * 0.08} className="flex items-start gap-5 py-8 md:flex-col md:items-center md:px-8 md:py-14 md:text-center">

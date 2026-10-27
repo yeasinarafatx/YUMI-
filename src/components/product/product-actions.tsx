@@ -146,10 +146,10 @@ Please confirm my order with Cash on Delivery!`;
             onClick={handleBuyNow}
             disabled={isSoldOut}
             id="product-buy-now-btn"
-            className="btn btn-primary h-13 flex-1 gap-2 text-xs sm:text-sm font-bold uppercase tracking-widest shadow-md cursor-pointer hover:shadow-lg active:scale-95"
+            className="btn btn-primary h-13 min-w-0 flex-1 gap-2 px-3 sm:px-8 text-xs sm:text-sm font-bold uppercase tracking-widest shadow-md cursor-pointer hover:shadow-lg active:scale-95"
           >
             <Zap size={16} className="fill-current text-gold" />
-            {isSoldOut ? "Sold Out" : "Buy Now · Order Directly"}
+            {isSoldOut ? "Sold Out" : (<><span className="sm:hidden">Buy Now</span><span className="hidden sm:inline">Buy Now · Order Directly</span></>)}
           </button>
         </div>
 
