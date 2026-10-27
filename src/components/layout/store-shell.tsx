@@ -24,6 +24,8 @@ export async function StoreShell({ children }: { children: ReactNode }) {
         {children}
       </main>
       <Footer categories={categories} settings={settings} />
+      {/* Reserve room for the fixed mobile bottom navigation */}
+      <div aria-hidden="true" className="h-[calc(3.5rem+env(safe-area-inset-bottom))] bg-accent lg:hidden" />
       <CartDrawer />
       <WhatsAppFloat whatsappNumber={settings.whatsapp_number} />
       <AnnouncementPopup popup={settings.announcement_popup} />

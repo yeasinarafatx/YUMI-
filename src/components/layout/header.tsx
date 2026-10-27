@@ -3,12 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Menu, Search, ShoppingBag } from "lucide-react";
+import { Search, ShoppingBag } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { useCartStore, selectCartCount } from "@/stores/cart-store";
 import { useHydrated } from "@/hooks/use-hydrated";
 import { MobileMenu } from "@/components/layout/mobile-menu";
+import { BottomNav } from "@/components/layout/bottom-nav";
 import { Logo } from "@/components/layout/logo";
 import { InstagramIcon, FacebookIcon } from "@/components/icons/brand-icons";
 import type { SocialLinks } from "@/types";
@@ -52,19 +53,6 @@ export function Header({ social }: HeaderProps) {
         <div className="container-luxe grid h-20 grid-cols-[1fr_auto_1fr] items-center md:h-24">
           {/* Left: menu (mobile) / nav (desktop) */}
           <div className="flex items-center">
-            <button
-              ref={menuButtonRef}
-              type="button"
-              onClick={() => setMenuOpen((prev) => !prev)}
-              className="-ml-2 inline-flex h-12 w-12 items-center justify-center rounded-full text-ink transition-all hover:bg-line/40 active:scale-90 lg:hidden cursor-pointer"
-              aria-label="Open menu"
-              aria-expanded={menuOpen}
-              aria-controls="mobile-navigation-drawer"
-              id="header-menu-button"
-            >
-              <Menu size={26} strokeWidth={1.5} />
-            </button>
-
             <nav aria-label="Main" className="hidden lg:block">
               <ul className="flex items-center gap-7 xl:gap-9">
                 {siteConfig.nav.map((item) => {
@@ -148,6 +136,13 @@ export function Header({ social }: HeaderProps) {
       </header>
 
       <MobileMenu open={menuOpen} onClose={closeMenu} social={social} pathname={pathname} />
+      <BottomNav
+        pathname={pathname}
+        cartCount={cartCount}
+        menuOpen={menuOpen}
+        onShop={() => setMenuOpen((prev) => !prev)}
+        shopButtonRef={menuButtonRef}
+      />
     </>
   );
 }

@@ -35,7 +35,7 @@ export function WhatsAppFloat({ whatsappNumber = "01700000000" }: WhatsAppFloatP
   )}`;
 
   return (
-    <aside aria-label="Customer Support" className="fixed bottom-6 right-5 z-40 flex items-center gap-3">
+    <aside aria-label="Customer Support" className="fixed bottom-[calc(4.5rem+env(safe-area-inset-bottom))] right-5 lg:bottom-6 z-40 flex items-center gap-3">
       <AnimatePresence>
         {showTooltip && (
           <m.div

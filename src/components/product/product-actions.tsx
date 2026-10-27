@@ -203,7 +203,7 @@ Please confirm my order with Cash on Delivery!`;
 
       {/* Sticky Mobile Purchase Bar (Always within thumb reach on phone) */}
       <div
-        className={`fixed inset-x-0 bottom-0 z-40 border-t border-line bg-cream/95 p-3 backdrop-blur-md transition-all duration-300 md:hidden ${
+        className={`fixed inset-x-0 bottom-[calc(3.5rem+env(safe-area-inset-bottom))] z-40 border-t border-line bg-cream/95 p-3 backdrop-blur-md transition-all duration-300 md:hidden ${
           showStickyBar ? "translate-y-0 opacity-100 shadow-[0_-8px_30px_rgba(0,0,0,0.12)]" : "translate-y-full opacity-0 pointer-events-none"
         }`}
       >

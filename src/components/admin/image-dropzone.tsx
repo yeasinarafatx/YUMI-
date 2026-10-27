@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useRef } from "react";
-import Image from "next/image";
 import { UploadCloud, CheckCircle2, Loader2, X, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
+import imageCompression from "browser-image-compression";
 
 interface ImageDropzoneProps {
   value?: string;
@@ -18,10 +18,10 @@ export function ImageDropzone({
   onChange,
   aspectRatio = "16/9",
   label = "Upload Image (Drag & Drop or Select)",
-  hint = "JPG, PNG, WebP (Maximum 5MB)",
+  hint = "JPG, PNG, WebP (Auto-compressed to WebP under 100KB)",
 }: ImageDropzoneProps) {
   const [isDragging, setIsDragging] = useState(false);
-  const [uploading, setUploading] = useState(false);
+  const [status, setStatus] = useState<"idle" | "compressing" | "uploading">("idle");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleUpload = async (file: File) => {
@@ -31,16 +31,37 @@ export function ImageDropzone({
       return;
     }
 
-    if (file.size > 5 * 1024 * 1024) {
-      toast.error("Image file size cannot exceed 5MB.");
+    if (file.size > 25 * 1024 * 1024) {
+      toast.error("Image file size cannot exceed 25MB.");
       return;
     }
 
-    setUploading(true);
-
     try {
+      // 1. Show 'Compressing...' loading state
+      setStatus("compressing");
+
+      // Requirements: Max 100KB (0.1MB), max width/height 1080px, strictly image/webp format
+      const compressionOptions = {
+        maxSizeMB: 0.1, // 100KB limit
+        maxWidthOrHeight: 1080, // max 1080px width or height
+        useWebWorker: true,
+        fileType: "image/webp", // strictly convert to 'image/webp'
+      };
+
+      const compressedBlob = await imageCompression(file, compressionOptions);
+
+      // Strictly ensure output File object carries 'image/webp' mime type & .webp extension
+      const baseName = file.name.replace(/\.[^/.]+$/, "");
+      const webpFile = new File([compressedBlob], `${baseName}.webp`, {
+        type: "image/webp",
+        lastModified: Date.now(),
+      });
+
+      // 2. Show 'Uploading...' loading state
+      setStatus("uploading");
+
       const formData = new FormData();
-      formData.append("file", file);
+      formData.append("file", webpFile);
 
       const res = await fetch("/api/admin/upload", {
         method: "POST",
@@ -54,11 +75,13 @@ export function ImageDropzone({
       }
 
       onChange(data.url);
-      toast.success("Image uploaded successfully!");
+      const originalKB = (file.size / 1024).toFixed(0);
+      const compressedKB = (webpFile.size / 1024).toFixed(0);
+      toast.success(`Image compressed (${originalKB}KB → ${compressedKB}KB WebP) & uploaded!`);
     } catch (err: any) {
-      toast.error(err.message || "Failed to upload image.");
+      toast.error(err.message || "Failed to process and upload image.");
     } finally {
-      setUploading(false);
+      setStatus("idle");
     }
   };
 
@@ -83,6 +106,8 @@ export function ImageDropzone({
       : aspectRatio === "1/1"
         ? "aspect-square"
         : "aspect-[4/5]";
+
+  const isBusy = status !== "idle";
 
   return (
     <div className="space-y-2">
@@ -120,16 +145,26 @@ export function ImageDropzone({
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
-              disabled={uploading}
-              className="btn btn-primary h-9 px-4 text-xs font-bold gap-1.5 shadow-md cursor-pointer"
+              disabled={isBusy}
+              className="btn btn-primary h-9 px-4 text-xs font-bold gap-1.5 shadow-md cursor-pointer disabled:opacity-75"
             >
-              {uploading ? <Loader2 size={14} className="animate-spin" /> : <RefreshCw size={14} />}
-              Change Image
+              {isBusy ? (
+                <>
+                  <Loader2 size={14} className="animate-spin" />
+                  <span>{status === "compressing" ? "Compressing..." : "Uploading..."}</span>
+                </>
+              ) : (
+                <>
+                  <RefreshCw size={14} />
+                  <span>Change Image</span>
+                </>
+              )}
             </button>
             <button
               type="button"
               onClick={() => onChange("")}
-              className="btn btn-outline h-9 px-3 text-xs bg-white text-rose-600 hover:bg-rose-50 border-rose-200 cursor-pointer"
+              disabled={isBusy}
+              className="btn btn-outline h-9 px-3 text-xs bg-white text-rose-600 hover:bg-rose-50 border-rose-200 cursor-pointer disabled:opacity-50"
               title="Remove image"
             >
               <X size={14} />
@@ -145,17 +180,26 @@ export function ImageDropzone({
           }}
           onDragLeave={() => setIsDragging(false)}
           onDrop={handleDrop}
-          onClick={() => fileInputRef.current?.click()}
+          onClick={() => {
+            if (!isBusy) fileInputRef.current?.click();
+          }}
           className={`flex ${aspectClass} max-w-xl flex-col items-center justify-center rounded-lg border-2 border-dashed p-6 text-center transition-all cursor-pointer ${
             isDragging
               ? "border-accent bg-accent/10 scale-[1.01]"
               : "border-line bg-sand/40 hover:border-accent/60 hover:bg-sand/70"
-          }`}
+          } ${isBusy ? "cursor-wait opacity-90" : ""}`}
         >
-          {uploading ? (
+          {isBusy ? (
             <div className="flex flex-col items-center gap-2 text-accent">
               <Loader2 size={32} className="animate-spin" />
-              <p className="text-xs font-bold">Uploading image, please wait...</p>
+              <p className="text-xs font-bold">
+                {status === "compressing" ? "Compressing..." : "Uploading..."}
+              </p>
+              <p className="text-[0.6875rem] text-muted">
+                {status === "compressing"
+                  ? "Converting strictly to WebP (max 100KB, 1080px)..."
+                  : "Uploading to storage..."}
+              </p>
             </div>
           ) : (
             <div className="flex flex-col items-center gap-2 text-muted">
