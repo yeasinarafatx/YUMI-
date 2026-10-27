@@ -107,7 +107,7 @@ export function Header({ social }: HeaderProps) {
             <Link
               href="/search"
               id="header-search-link"
-              className="inline-flex h-11 w-11 items-center justify-center text-ink transition-colors hover:text-accent"
+              className="inline-flex h-11 w-11 items-center justify-center text-ink transition-all duration-150 hover:text-accent active:scale-90 cursor-pointer"
               aria-label="Search products"
             >
               <Search size={20} strokeWidth={1.25} />
@@ -116,7 +116,7 @@ export function Header({ social }: HeaderProps) {
               type="button"
               onClick={useCartStore.getState().open}
               id="header-cart-link"
-              className="relative -mr-2.5 inline-flex h-11 w-11 items-center justify-center text-ink transition-colors hover:text-accent"
+              className="relative -mr-2.5 inline-flex h-11 w-11 items-center justify-center text-ink transition-all duration-150 hover:text-accent active:scale-90 cursor-pointer"
               aria-label={`Cart, ${cartCount} ${cartCount === 1 ? "item" : "items"}`}
             >
               <ShoppingBag size={20} strokeWidth={1.25} />

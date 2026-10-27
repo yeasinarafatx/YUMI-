@@ -157,7 +157,7 @@ export function MobileMenu({ open, onClose, social, pathname }: MobileMenuProps)
                     <Link
                       href={item.href}
                       onClick={onClose}
-                      className={`group flex items-center justify-between py-3.5 transition-colors ${
+                      className={`group flex items-center justify-between py-3.5 px-2 -mx-2 rounded transition-all duration-150 active:scale-[0.98] active:bg-sand/70 ${
                         active ? "text-accent font-semibold" : "text-ink hover:text-accent"
                       }`}
                     >

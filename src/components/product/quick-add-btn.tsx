@@ -1,13 +1,16 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "@/stores/cart-store";
 import { toast } from "sonner";
-import { Zap, ShoppingBag } from "lucide-react";
+import { Zap, ShoppingBag, Loader2, Check } from "lucide-react";
 import type { ProductWithRelations } from "@/types";
 
 export function QuickAddBtn({ product }: { product: ProductWithRelations }) {
   const router = useRouter();
+  const [isBuying, setIsBuying] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
   const addItem = useCartStore((s) => s.addItem);
   const openCart = useCartStore((s) => s.open);
   const isSoldOut = product.track_stock && (product.stock_quantity ?? 0) <= 0;
@@ -15,7 +18,8 @@ export function QuickAddBtn({ product }: { product: ProductWithRelations }) {
   const handleBuyNow = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (isSoldOut) return;
+    if (isSoldOut || isBuying) return;
+    setIsBuying(true);
 
     addItem(
       {
@@ -35,7 +39,8 @@ export function QuickAddBtn({ product }: { product: ProductWithRelations }) {
   const handleQuickAdd = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    if (isSoldOut) return;
+    if (isSoldOut || isAdding) return;
+    setIsAdding(true);
 
     addItem(
       {
@@ -51,6 +56,7 @@ export function QuickAddBtn({ product }: { product: ProductWithRelations }) {
 
     toast.success(`${product.name} added to your bag!`);
     openCart();
+    setTimeout(() => setIsAdding(false), 1200);
   };
 
   if (isSoldOut) return null;
@@ -60,20 +66,31 @@ export function QuickAddBtn({ product }: { product: ProductWithRelations }) {
       <button
         type="button"
         onClick={handleBuyNow}
-        className="flex-1 h-9 flex items-center justify-center gap-1.5 rounded-sm bg-accent px-2.5 text-[0.6875rem] font-bold uppercase tracking-wider text-cream shadow-md transition-all hover:bg-ink active:scale-95 cursor-pointer"
+        disabled={isBuying}
+        className="flex-1 h-9 flex items-center justify-center gap-1.5 rounded-sm bg-accent px-2.5 text-[0.6875rem] font-bold uppercase tracking-wider text-cream shadow-md transition-all duration-150 hover:bg-ink active:scale-95 cursor-pointer"
         aria-label={`Buy ${product.name} now`}
       >
-        <Zap size={12} className="fill-current text-gold" />
-        <span>Buy Now</span>
+        {isBuying ? (
+          <>
+            <Loader2 size={12} className="animate-spin text-gold" />
+            <span>Redirecting...</span>
+          </>
+        ) : (
+          <>
+            <Zap size={12} className="fill-current text-gold" />
+            <span>Buy Now</span>
+          </>
+        )}
       </button>
       <button
         type="button"
         onClick={handleQuickAdd}
+        disabled={isAdding}
         title="Add to bag"
-        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm bg-cream/95 text-ink shadow-md backdrop-blur transition-all hover:bg-sand active:scale-95 cursor-pointer"
+        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm bg-cream/95 text-ink shadow-md backdrop-blur transition-all duration-150 hover:bg-sand active:scale-95 cursor-pointer"
         aria-label={`Add ${product.name} to bag`}
       >
-        <ShoppingBag size={14} />
+        {isAdding ? <Check size={14} className="text-emerald-700" /> : <ShoppingBag size={14} />}
       </button>
     </div>
   );

@@ -27,13 +27,18 @@ export function ProductCard({
   const soldOut = stock.kind === "out_of_stock";
 
   return (
-    <article className={cn("group relative transition-all duration-500 ease-out hover:-translate-y-1 active:scale-[0.98]", className)}>
+    <article className={cn("group relative transition-all duration-200 ease-out hover:-translate-y-1.5 hover:shadow-lg active:scale-[0.97] active:brightness-95 cursor-pointer select-none", className)}>
       <Link
         href={`/product/${product.slug}`}
         className="block focus-visible:outline-offset-4"
         aria-label={`${product.name}${soldOut ? " — sold out" : ""}`}
       >
         <div className="relative aspect-[4/5] overflow-hidden bg-sand">
+          {/* Instant tactile press overlay */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-accent/0 transition-colors duration-150 group-active:bg-accent/15 pointer-events-none z-10"
+          />
           {primary && (
             <Image
               src={primary.url}

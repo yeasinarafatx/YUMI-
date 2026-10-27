@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
-import { Minus, Plus, ShoppingBag, ShieldCheck, Truck, RefreshCw, Zap } from "lucide-react";
+import { Minus, Plus, ShoppingBag, ShieldCheck, Truck, RefreshCw, Zap, Loader2, Check } from "lucide-react";
 import { toast } from "sonner";
 import { useCartStore } from "@/stores/cart-store";
 import { formatBDT, getStockState, toWhatsAppNumber } from "@/lib/utils";
@@ -18,6 +18,8 @@ export function ProductActions({ product, settings }: ProductActionsProps) {
   const router = useRouter();
   const [quantity, setQuantity] = useState(1);
   const [showStickyBar, setShowStickyBar] = useState(false);
+  const [isBuying, setIsBuying] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
   const addItem = useCartStore((s) => s.addItem);
   const openCart = useCartStore((s) => s.open);
 
@@ -29,7 +31,8 @@ export function ProductActions({ product, settings }: ProductActionsProps) {
   const handleIncrease = () => setQuantity((q) => Math.min(maxStock, q + 1));
 
   const handleBuyNow = () => {
-    if (isSoldOut) return;
+    if (isSoldOut || isBuying) return;
+    setIsBuying(true);
 
     addItem(
       {
@@ -47,7 +50,8 @@ export function ProductActions({ product, settings }: ProductActionsProps) {
   };
 
   const handleAddToCart = () => {
-    if (isSoldOut) return;
+    if (isSoldOut || isAdding) return;
+    setIsAdding(true);
 
     addItem(
       {
@@ -63,6 +67,7 @@ export function ProductActions({ product, settings }: ProductActionsProps) {
 
     toast.success(`${product.name} added to your bag!`);
     openCart();
+    setTimeout(() => setIsAdding(false), 1200);
   };
 
   // WhatsApp Order message
@@ -144,12 +149,21 @@ Please confirm my order with Cash on Delivery!`;
           <button
             type="button"
             onClick={handleBuyNow}
-            disabled={isSoldOut}
+            disabled={isSoldOut || isBuying}
             id="product-buy-now-btn"
-            className="btn btn-primary h-13 min-w-0 flex-1 gap-2 px-3 sm:px-8 text-xs sm:text-sm font-bold uppercase tracking-widest shadow-md cursor-pointer hover:shadow-lg active:scale-95"
+            className="btn btn-primary h-13 min-w-0 flex-1 gap-2 px-3 sm:px-8 text-xs sm:text-sm font-bold uppercase tracking-widest shadow-md cursor-pointer hover:shadow-lg active:scale-95 transition-all"
           >
-            <Zap size={16} className="fill-current text-gold" />
-            {isSoldOut ? "Sold Out" : (<><span className="sm:hidden">Buy Now</span><span className="hidden sm:inline">Buy Now · Order Directly</span></>)}
+            {isBuying ? (
+              <>
+                <Loader2 size={16} className="animate-spin text-gold" />
+                <span>Redirecting...</span>
+              </>
+            ) : (
+              <>
+                <Zap size={16} className="fill-current text-gold" />
+                {isSoldOut ? "Sold Out" : (<><span className="sm:hidden">Buy Now</span><span className="hidden sm:inline">Buy Now · Order Directly</span></>)}
+              </>
+            )}
           </button>
         </div>
 
@@ -160,10 +174,19 @@ Please confirm my order with Cash on Delivery!`;
             onClick={handleAddToCart}
             disabled={isSoldOut}
             id="product-add-to-cart-btn"
-            className="btn btn-outline h-12 gap-2 text-xs font-semibold uppercase tracking-wider cursor-pointer hover:bg-sand active:scale-95"
+            className="btn btn-outline h-12 gap-2 text-xs font-semibold uppercase tracking-wider cursor-pointer hover:bg-sand active:scale-95 transition-all"
           >
-            <ShoppingBag size={15} />
-            Add to Bag
+            {isAdding ? (
+              <>
+                <Check size={16} className="text-emerald-700" />
+                <span className="text-emerald-800">Added!</span>
+              </>
+            ) : (
+              <>
+                <ShoppingBag size={15} />
+                <span>Add to Bag</span>
+              </>
+            )}
           </button>
 
           <a
@@ -233,10 +256,10 @@ Please confirm my order with Cash on Delivery!`;
             <button
               type="button"
               onClick={handleBuyNow}
-              disabled={isSoldOut}
-              className="btn btn-primary h-10 px-5 text-xs font-bold uppercase tracking-wider shadow"
+              disabled={isSoldOut || isBuying}
+              className="btn btn-primary h-10 px-5 text-xs font-bold uppercase tracking-wider shadow active:scale-95"
             >
-              {isSoldOut ? "Sold Out" : "Buy Now"}
+              {isBuying ? "Loading..." : isSoldOut ? "Sold Out" : "Buy Now"}
             </button>
           </div>
         </div>
